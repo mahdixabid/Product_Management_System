@@ -33,3 +33,32 @@ function getTotal() {
         total.style.background = 'red';
     }
 }
+
+
+// create product
+let dataPro;
+if (localStorage.product != null) {
+    dataPro = JSON.parse(localStorage.product)
+} else {
+    let dataPro = [];
+}
+
+
+// collect data
+submit.onclick = function() {
+    var newPro = {
+        title: title.value,
+        price: price.value,
+        taxes: taxes.value,
+        ads: ads.value,
+        discount: discount.value,
+        total: total.innerHTML,
+        count: count.value,
+        category: category.value
+    }
+    dataPro.push(newPro);
+    // storing data in local storage & handling 
+    localStorage.setItem('product', JSON.stringify(dataPro))
+    console.log(dataPro);
+
+}
