@@ -1,9 +1,9 @@
 // Objects :
-// get total ✅
-// create product ✅
-// save localstorage ✅
-// clear inputs ✅
-// read ✅
+// get total ✔
+// create product ✔
+// save localstorage ✔
+// clear inputs ✔
+// read ✔
 // delete
 // count
 // update
@@ -92,11 +92,33 @@ function showData() {
             <td>${dataPro[i].total}</td>
             <td>${dataPro[i].category}</td>
             <td><button id="update">update</button></td>
-            <td><button id="delete">delete</button></td>
+            <td><button onclick="deletedata(${i})" id="delete">delete</button></td>
         </tr>
         `
     }
     document.getElementById('tbody').innerHTML = table;
+    let btnDelete = document.getElementById('deleteAll');
+    if (dataPro.length > 0) {
+        btnDelete.innerHTML = `
+        <button onclick="deleteAll()">delete All</button>
+        `
+    } else {
+        btnDelete.innerHTML = '';
+    }
 
 }
 showData()
+
+
+// delete
+function deletedata(i) {
+    dataPro.splice(i, 1);
+    localStorage.product = JSON.stringify(dataPro)
+    showData()
+}
+
+function deleteAll() {
+    localStorage.clear()
+    dataPro.splice(0)
+    showData()
+}
