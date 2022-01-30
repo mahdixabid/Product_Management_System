@@ -20,7 +20,8 @@ let total = document.getElementById('total');
 let count = document.getElementById('count');
 let category = document.getElementById('category');
 let submit = document.getElementById('submit');
-
+let btn = 'create';
+let tmp;
 
 // get total
 function getTotal() {
@@ -46,22 +47,29 @@ if (localStorage.product != null) {
 // collecting data
 submit.onclick = function() {
     let newPro = {
-            title: title.value,
-            price: price.value,
-            taxes: taxes.value,
-            ads: ads.value,
-            discount: discount.value,
-            total: total.innerHTML,
-            count: count.value,
-            category: category.value
-        }
-        //count
-    if (newPro.count > 1) {
-        for (let i = 0; i < newPro.count; i++) {
+        title: title.value,
+        price: price.value,
+        taxes: taxes.value,
+        ads: ads.value,
+        discount: discount.value,
+        total: total.innerHTML,
+        count: count.value,
+        category: category.value
+    }
+    if (btn === 'create') {
+        if (newPro.count > 1) {
+            for (let i = 0; i < newPro.count; i++) {
+                dataPro.push(newPro);
+            }
+        } else {
             dataPro.push(newPro);
         }
     } else {
-        dataPro.push(newPro);
+        dataPro[tmp] = newPro;
+        btn = 'create';
+        submit.innerHTML = "create";
+        count.style.display = "block";
+
     }
 
 
@@ -88,6 +96,7 @@ function clearData() {
 
 // read
 function showData() {
+    getTotal()
     let table = '';
     for (let i = 0; i < dataPro.length; i++) {
         table += `
@@ -100,7 +109,7 @@ function showData() {
             <td>${dataPro[i].discount}</td>
             <td>${dataPro[i].total}</td>
             <td>${dataPro[i].category}</td>
-            <td><button id="update">update</button></td>
+            <td><button onclick="updateData(${i})" id="update">update</button></td>
             <td><button onclick="deletedata(${i})" id="delete">delete</button></td>
         </tr>
         `
@@ -130,4 +139,23 @@ function deleteAll() {
     localStorage.clear()
     dataPro.splice(0)
     showData()
+}
+
+
+// update
+function updateData(i) {
+    title.value = dataPro[i].title;
+    price.value = dataPro[i].price;
+    taxes.value = dataPro[i].taxes;
+    ads.value = dataPro[i].ads;
+    discount.value = dataPro[i].discount;
+    getTotal()
+    count.style.display = "none";
+    category.value = dataPro[i].category;
+    submit.innerHTML = "update";
+    btn = 'update';
+    tmp = i;
+    scroll({
+        top: 0
+    })
 }
