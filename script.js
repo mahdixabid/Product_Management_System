@@ -34,19 +34,18 @@ function getTotal() {
     }
 }
 
-
-// create product
 let dataPro;
+// create product
 if (localStorage.product != null) {
     dataPro = JSON.parse(localStorage.product)
 } else {
-    let dataPro = [];
+    dataPro = [];
 }
 
 
-// collect data
+// collecting data
 submit.onclick = function() {
-    var newPro = {
+    let newPro = {
         title: title.value,
         price: price.value,
         taxes: taxes.value,
@@ -60,5 +59,4 @@ submit.onclick = function() {
     // storing data in local storage & handling 
     localStorage.setItem('product', JSON.stringify(dataPro))
     console.log(dataPro);
-
 }
