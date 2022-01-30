@@ -4,8 +4,8 @@
 // save localstorage ✔
 // clear inputs ✔
 // read ✔
-// delete
-// count
+// delete ✔
+// count ✔
 // update
 // search
 // clean data
@@ -46,16 +46,25 @@ if (localStorage.product != null) {
 // collecting data
 submit.onclick = function() {
     let newPro = {
-        title: title.value,
-        price: price.value,
-        taxes: taxes.value,
-        ads: ads.value,
-        discount: discount.value,
-        total: total.innerHTML,
-        count: count.value,
-        category: category.value
+            title: title.value,
+            price: price.value,
+            taxes: taxes.value,
+            ads: ads.value,
+            discount: discount.value,
+            total: total.innerHTML,
+            count: count.value,
+            category: category.value
+        }
+        //count
+    if (newPro.count > 1) {
+        for (let i = 0; i < newPro.count; i++) {
+            dataPro.push(newPro);
+        }
+    } else {
+        dataPro.push(newPro);
     }
-    dataPro.push(newPro);
+
+
     // storing data in local storage & handling 
     localStorage.setItem('product', JSON.stringify(dataPro))
     clearData()
@@ -100,7 +109,7 @@ function showData() {
     let btnDelete = document.getElementById('deleteAll');
     if (dataPro.length > 0) {
         btnDelete.innerHTML = `
-        <button onclick="deleteAll()">delete All</button>
+        <button onclick="deleteAll()">delete All (${dataPro.length})</button>
         `
     } else {
         btnDelete.innerHTML = '';
