@@ -28,22 +28,21 @@
             <input placeholder="category" type="text" id="category">
             <button id="submit">Create</button>
             <div class="searchBlock">
-                <input type="text" name="search" id="search" placeholder="search">
+                <input onkeyup="searchData(this.value)" type="text" id="search" placeholder="search">
             </div>
             <div class="btn-search">
-                <button id="searchTitle">
+                <button ondblclick="getSearchBtn (this.id)" id="searchTitle">
                     Search By Title
                 </button>
-                <button id="searchCategory">
-                    Search By Title
+                <button ondblclick="getSearchBtn (this.id)" id="searchCategory">
+                    Search By Category
                 </button>
             </div>
         </div>
 
     </div>
-
-
     <div class="outputs">
+        <div id="deleteAll"></div>
         <table>
             <tr>
                 <th>ID</th>
@@ -57,41 +56,14 @@
                 <th>UPDATE</th>
                 <th>delete</th>
             </tr>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>sumsung</td>
-                    <td>2000</td>
-                    <td>100</td>
-                    <td>100</td>
-                    <td>2100</td>
-                    <td>3600</td>
-                    <td>phone</td>
-                    <td><button id="update">update</button></td>
-                    <td><button id="delete">delete</button></td>
+            <tbody id="tbody">
 
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>sumsung</td>
-                    <td>2000</td>
-                    <td>100</td>
-                    <td>100</td>
-                    <td>2100</td>
-                    <td>3100</td>
-                    <td>phone</td>
-                    <td><button id="update">update</button></td>
-                    <td><button id="delete">delete</button></td>
-
-                </tr>
             </tbody>
         </table>
     </div>
 
-
-
-
     <script src="script.js"></script>
+
 </body>
 
 </html>
