@@ -6,7 +6,7 @@ This project is simply in HTML, CSS, and JavaScript. The user can add the record
 <br>
 
 ### Preview :  
-[![preview](https://i.ibb.co/HTxpWWz/preview.png "preview")](https://i.ibb.co/HTxpWWz/preview.png "preview")
+[![preview](preview.png "preview")](preview.png "preview")
 
 <br>
 Live demo : https://mahdixabid.github.io/Product_Management_System/main.html
