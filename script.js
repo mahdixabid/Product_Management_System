@@ -54,24 +54,52 @@ submit.onclick = function() {
         discount: discount.value,
         total: total.innerHTML,
         count: count.value,
-        category: category.value
+        category: category.value.toLowerCase(),
     }
-    if (btn === 'create') { //count
-        if (newPro.count > 1) {
-            for (let i = 0; i < newPro.count; i++) {
+    if (title.value == '' || price.value == '' || count.value == '' || category.value == '') {
+        alert("error")
+        title.style.backgroundColor = "#ff000045";
+        price.style.backgroundColor = "#ff000045";
+        count.style.backgroundColor = "#ff000045";
+        category.style.backgroundColor = "#ff000045";
+        resetColor();
+
+    } else {
+        if (btn === 'create') { //count
+            if (newPro.count > 1) {
+                for (let i = 0; i < newPro.count; i++) {
+                    dataPro.push(newPro);
+                }
+
+            } else {
                 dataPro.push(newPro);
+                clearData();
             }
         } else {
-            dataPro.push(newPro);
+            dataPro[tmp] = newPro;
+            btn = 'create';
+            submit.innerHTML = "create";
+            count.style.display = "block";
+
         }
-    } else {
-        dataPro[tmp] = newPro;
-        btn = 'create';
-        submit.innerHTML = "create";
-        count.style.display = "block";
 
     }
 
+    function resetColor() {
+        title.addEventListener('click', function() {
+            title.style.backgroundColor = "#111";
+        });
+        price.addEventListener('click', function() {
+            price.style.backgroundColor = "#111";
+        });
+        count.addEventListener('click', function() {
+            count.style.backgroundColor = "#111";
+        });
+        category.addEventListener('click', function() {
+            category.style.backgroundColor = "#111";
+        });
+
+    }
 
     // storing data in local storage & handling 
     localStorage.setItem('product', JSON.stringify(dataPro))
@@ -80,17 +108,20 @@ submit.onclick = function() {
 }
 
 
-
 // clear inputs
 function clearData() {
-    title.value = '';
-    price.value = '';
-    taxes.value = '';
-    ads.value = '';
-    discount.value = '';
-    total.innerHTML = '';
-    count.value = '';
-    category.value = '';
+    if (title.value || price.value || count.value || category.value != '') {
+        return (value)
+    } else {
+        title.value = '';
+        price.value = '';
+        taxes.value = '';
+        ads.value = '';
+        discount.value = '';
+        total.innerHTML = '';
+        count.value = '';
+        category.value = '';
+    }
 }
 
 
@@ -180,12 +211,13 @@ function getSearchBtn(id) {
 }
 
 function searchData(value) {
-    let table = '';
+    let table = ' ';
     if (searchMood == 'title') {
 
 
         for (let i = 0; i < dataPro.length; i++) {
             if (dataPro[i].title.includes(value)) {
+                console.log(dataPro[i].title)
                 for (let i = 0; i < dataPro.length; i++) {
                     table += `
                     <tr>
@@ -201,30 +233,28 @@ function searchData(value) {
                         <td><button onclick="deletedata(${i})" id="delete">delete</button></td>
                     </tr>
                     `;
-
-
                 }
             }
         }
 
     } else {
         for (let i = 0; i < dataPro.length; i++) {
-            if (dataPro[i].category.includes(value)) {
+            if (dataPro[i].category.toLowerCase().includes(value.toLowerCase())) {
                 for (let i = 0; i < dataPro.length; i++) {
                     table += `
-                    <tr>
-                        <td>${i}</td>
-                        <td>${dataPro[i].title}</td>
-                        <td>${dataPro[i].price}</td>
-                        <td>${dataPro[i].taxes}</td>
-                        <td>${dataPro[i].ads}</td>
-                        <td>${dataPro[i].discount}</td>
-                        <td>${dataPro[i].total}</td>
-                        <td>${dataPro[i].category}</td>
-                        <td><button onclick="updateData(${i})" id="update">update</button></td>
-                        <td><button onclick="deletedata(${i})" id="delete">delete</button></td>
-                    </tr>
-                    `;
+                 <tr>
+                     <td>${i}</td>
+                     <td>${dataPro[i].title}</td>
+                     <td>${dataPro[i].price}</td>
+                     <td>${dataPro[i].taxes}</td>
+                     <td>${dataPro[i].ads}</td>
+                     <td>${dataPro[i].discount}</td>
+                     <td>${dataPro[i].total}</td>
+                     <td>${dataPro[i].category}</td>
+                     <td><button onclick="updateData(${i})" id="update">update</button></td>
+                     <td><button onclick="deletedata(${i})" id="delete">delete</button></td>
+                 </tr>
+                 `;
 
 
                 }
