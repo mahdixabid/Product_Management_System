@@ -8,7 +8,7 @@
 // count ✔
 // update ✔
 // search ✔ [contain a beug]
-// clean data
+// clean data ✔ [contain a beug when the product created (manual refresh)]
 
 
 let title = document.getElementById('title');
@@ -43,7 +43,6 @@ if (localStorage.product != null) {
     dataPro = [];
 }
 
-
 // collecting data
 submit.onclick = function() {
     let newPro = {
@@ -57,7 +56,7 @@ submit.onclick = function() {
         category: category.value.toLowerCase(),
     }
     if (title.value == '' || price.value == '' || count.value == '' || category.value == '') {
-        alert("error")
+        alert("please fill the required fields")
         title.style.backgroundColor = "#ff000045";
         price.style.backgroundColor = "#ff000045";
         count.style.backgroundColor = "#ff000045";
@@ -111,7 +110,7 @@ submit.onclick = function() {
 // clear inputs
 function clearData() {
     if (title.value || price.value || count.value || category.value != '') {
-        return (value)
+        return (value);
     } else {
         title.value = '';
         price.value = '';
