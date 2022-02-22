@@ -1,3 +1,4 @@
+"use strict"
 // Objects :
 // get total ✔
 // create product ✔
@@ -109,8 +110,8 @@ submit.onclick = function() {
 
 // clear inputs
 function clearData() {
-    if (title.value || price.value || count.value || category.value != '') {
-        return (value);
+    if (title.value != '' || price.value != '' || count.value != '' || category.value != '') {
+        return value;
     } else {
         title.value = '';
         price.value = '';
