@@ -9,7 +9,7 @@
 // count ✔
 // update ✔
 // search ✔ [contain a beug]
-// clean data ✔ [contain a beug when the product created (manual refresh)]
+// clean data ✔
 
 
 let title = document.getElementById('title');
@@ -58,12 +58,19 @@ submit.onclick = function() {
     }
     if (title.value == '' || price.value == '' || count.value == '' || category.value == '') {
         alert("please fill the required fields")
-        title.style.backgroundColor = "#ff000045";
-        price.style.backgroundColor = "#ff000045";
-        count.style.backgroundColor = "#ff000045";
-        category.style.backgroundColor = "#ff000045";
+        if (title.value == '') {
+            title.style.backgroundColor = "#ff000045";
+        }
+        if (price.value == '') {
+            price.style.backgroundColor = "#ff000045";
+        }
+        if (count.value == '') {
+            count.style.backgroundColor = "#ff000045";
+        }
+        if (category.value == '') {
+            category.style.backgroundColor = "#ff000045";
+        }
         resetColor();
-
     } else {
         if (btn === 'create') { //count
             if (newPro.count > 1) {
